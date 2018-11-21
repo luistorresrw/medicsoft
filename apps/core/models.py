@@ -1,27 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
-
 class Titulo(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
     descripcionReducida = models.CharField("ALIAS", max_length=5, blank=True)
     observacion = models.TextField("OBSERVACION", blank=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion + " (" + self.descripcionReducida + ")"
-
-    """def save(self):
-        self.descripcion = self.descripcion.upper()
-        self.descripcionReducida = self.descripcionReducida.upper()
-        self.observacion = self.observacion.upper()
-        super(Profesion, self).save()"""
-
-    class Admin:
-        pass
 
     class Meta:
         ordering = ['descripcion']
@@ -32,65 +21,49 @@ class TipoSexo(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, unique=True)
     observacion = models.TextField("OBSERVACION", blank=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion
-
-    """def save(self):
-        self.descripcion = self.descripcion.upper()
-        self.observacion = self.observacion.upper()
-        self.descripcionReducida = self.descripcionReducida.upper()
-        super(TipoSexo, self).save()"""
 
     class Meta:
         ordering = ['descripcion']
         verbose_name_plural = "Tipos de sexo"
-        verbose_name = "tiposexo"
+        verbose_name = "tipo de sexo"
 
 class TipoDomicilio(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, unique=True)
     observacion = models.TextField("OBSERVACION", blank=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion= models.DateTimeField(auto_now_add=True)
-    fechaModificacion=models.DateTimeField(auto_now=True, null=True)
-    def __unicode__(self):
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion= models.DateTimeField(auto_now_add=True)
+    #fechaModificacion=models.DateTimeField(auto_now=True, null=True)
+    def __str__(self):
         return self.descripcion
-    """def save(self):
-        self.descripcion = self.descripcion.upper()
-        self.descripcionReducida = self.descripcionReducida.upper()
-        self.observacion = self.observacion.upper()
-        super(TipoDomicilio, self).save()"""
+
     class Meta:
         ordering = ['descripcion']
         verbose_name_plural = "Tipos de domicilios"
-        verbose_name = "tipodomicilio"
+        verbose_name = "tipo de domicilio"
 
 
 class TipoDocumento(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, unique=True)
     observacion = models.TextField("OBSERVACION", blank=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcionReducida
-
-    """def save(self):
-        self.descripcion = self.descripcion.upper()
-        self.descripcionReducida = self.descripcionReducida.upper()
-        self.observacion = self.observacion.upper()
-        super(TipoDocumento, self).save()"""
 
     class Meta:
         ordering = ['descripcion']
         verbose_name_plural = "Tipos de documentos"
-        verbose_name = "tipodocumento"
+        verbose_name = "tipo de documento"
 
 
 class Pais(models.Model):
@@ -99,19 +72,12 @@ class Pais(models.Model):
     codigoAlfa3 = descripcion = models.CharField("COD. 3 LETRAS", max_length=3)
     descripcion = descripcion = models.CharField("DESCRIPCION", max_length=20)
     observacion = models.TextField("OBSERVACION", blank=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion
-
-    """def save(self):
-        self.codigoAlfa2 = self.codigoAlfa2.upper()
-        self.codigoAlfa3 = self.codigoAlfa3.upper()
-        self.descripcion = self.descripcion.upper()
-        self.observacion = self.observacion.upper()
-        super(Pais, self).save()"""
 
     class Meta:
         ordering = ['descripcion']
@@ -124,11 +90,11 @@ class Provincia(models.Model):
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, null=True)
     observacion = models.TextField("OBSERVACION", blank=True)
     pais = models.ForeignKey(Pais, on_delete=models.PROTECT)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True, null=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True, null=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion
 
     class Meta:
@@ -142,19 +108,12 @@ class Localidad(models.Model):
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, blank=True, null=True)
     observacion = models.TextField("OBSERVACION", blank=True, null=True)
     provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
-    ultimoUsuario = models.ForeignKey(User, editable=False, null=True, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True, null=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, null=True, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True, null=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion + " (" + self.provincia.descripcion + "-" + self.provincia.pais.codigoAlfa3 + ")"
-
-    """def save(self):
-        self.codigo = self.codigo.upper()
-        self.descripcion = self.descripcion.upper()
-        self.descripcionReducida = self.descripcionReducida.upper()
-        self.observacion = self.observacion.upper()
-        super(Localidad, self).save()"""
 
     class Meta:
         unique_together = [("descripcion", "provincia", "codigo")]
@@ -165,89 +124,79 @@ class TipoTelefono(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, unique=True)
     observacion = models.TextField("OBSERVACION", blank=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion= models.DateTimeField(auto_now_add=True)
-    fechaModificacion=models.DateTimeField(auto_now=True, null=True)
-    def __unicode__(self):
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion= models.DateTimeField(auto_now_add=True)
+    #fechaModificacion=models.DateTimeField(auto_now=True, null=True)
+    def __str__(self):
         return self.descripcion
-    """def save(self):
-        self.descripcion = self.descripcion.upper()
-        self.descripcionReducida = self.descripcionReducida.upper()
-        self.observacion = self.observacion.upper()
-        super(TipoTelefono, self).save()"""
+
     class Meta:
         ordering = ['descripcion']
         verbose_name_plural = "Tipos de telefono"
-        verbose_name = "tipotelefono"
+        verbose_name = "tipo de telefono"
 
 class TipoEstadoCivil(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, unique=True)
     observacion = models.TextField("OBSERVACION", blank=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion
-
-    """def save(self):
-        self.descripcion = self.descripcion.upper()
-        self.descripcionReducida = self.descripcionReducida.upper()
-        self.observacion = self.observacion.upper()
-        super(TipoTelefono, self).save()"""
 
     class Meta:
         ordering = ['descripcion']
         verbose_name_plural = "Tipos de estado civil"
-        verbose_name = "tipoestadocivil"
+        verbose_name = "tipo de estado civil"
 
 
 class FactorSanguineo(models.Model):
     descripcion = models.CharField(max_length=1, unique=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False,on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False,on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion
 
     class Meta:
         ordering = ['descripcion']
         verbose_name_plural = "Factores Sanguineos"
-        verbose_name = "factorsanguineo"
+        verbose_name = "factor sanguineo"
 
 class GrupoSanguineo(models.Model):
     descripcion = models.CharField(max_length=2)
     factor = models.ForeignKey(FactorSanguineo, on_delete=models.PROTECT)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion + "(" + self.factor.descripcion + ") "
 
     class Meta:
         unique_together = [("descripcion", "factor")]
         ordering = ['descripcion']
         verbose_name_plural = "Grupos Sanguineos"
-        verbose_name = "gruposanguineo"
+        verbose_name = "grupo sanguineo"
 
 
 class ObraSocial(models.Model):
     descripcion = models.CharField(max_length=100, unique=True)
     descripcion_reducida = models.CharField(max_length=4, unique=True)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "(" + self.descripcion_reducida + ") " + self.descripcion
 
     class Meta:
         ordering = ['descripcion_reducida']
         verbose_name_plural = "Obras Sociales"
-        verbose_name = "obrasocial"
+        verbose_name = "obra social"
 
 
 
@@ -256,16 +205,12 @@ class Especialidad(models.Model):
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, blank=True)
     observacion = models.TextField("OBSERVACION", blank=True)
     titulo = models.ForeignKey(Titulo, on_delete=models.PROTECT)
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion= models.DateTimeField(auto_now_add=True)
-    fechaModificacion=models.DateTimeField(auto_now=True, null=True)
-    def __unicode__(self):
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion= models.DateTimeField(auto_now_add=True)
+    #fechaModificacion=models.DateTimeField(auto_now=True, null=True)
+    def __str__(self):
         return self.descripcion  +" ("+ self.titulo.descripcionReducida +")"
-    """def save(self):
-        self.descripcion = self.descripcion.upper()
-        self.descripcionReducida = self.descripcionReducida.upper()
-        self.observacion = self.observacion.upper()
-        super(Especialidad, self).save()"""
+
     class Meta:
         unique_together =[("descripcion","titulo")]
         ordering = ['descripcion']
@@ -277,14 +222,14 @@ class DatosProfesionales(models.Model):
     matriculap = models.CharField("Matricula Provincial", blank=True, max_length=10, )
     matriculan = models.CharField("Matricula Nacional", blank=True, max_length=10, )
     email = models.EmailField("Correo Electronico")
-    usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_profesional", on_delete=models.DO_NOTHING)
-    usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_profesional", on_delete=models.DO_NOTHING)
-    ipCreacion = models.GenericIPAddressField(editable=False)
-    ipModificacion = models.GenericIPAddressField(editable=False, null=True)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_profesional", on_delete=models.DO_NOTHING)
+    #usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_profesional", on_delete=models.DO_NOTHING)
+    #ipCreacion = models.GenericIPAddressField(editable=False)
+    #ipModificacion = models.GenericIPAddressField(editable=False, null=True)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.especialidad
 
     class Meta:
@@ -296,15 +241,14 @@ class Telefono(models.Model):
     codigo_area = models.CharField("CODIGO DE AREA", max_length=20)
     numero = models.CharField("NUMERO TELEFONICO", max_length=20)
     observacion = models.TextField("OBSERVACION", blank=True)
-    #persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
-    usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_telefono", on_delete=models.DO_NOTHING)
-    usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_telefono", on_delete=models.DO_NOTHING)
-    ipCreacion = models.GenericIPAddressField(editable=False)
-    ipModificacion = models.GenericIPAddressField(editable=False, null=True)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_telefono", on_delete=models.DO_NOTHING)
+    #usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_telefono", on_delete=models.DO_NOTHING)
+    #ipCreacion = models.GenericIPAddressField(editable=False)
+    #ipModificacion = models.GenericIPAddressField(editable=False, null=True)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.codigo_area + '-' + self.numero
 
     class Meta:
@@ -316,20 +260,20 @@ class Domicilio(models.Model):
     direccion = models.CharField("DIRECCION", max_length=50)
     localidad = models.ForeignKey(Localidad, on_delete=models.PROTECT)
     observacion = models.TextField("OBSERVACION", blank=True)
-    #persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
-    usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_domicilio", on_delete=models.DO_NOTHING)
-    usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_domicilio", on_delete=models.DO_NOTHING)
-    ipCreacion = models.GenericIPAddressField(editable=False)
-    ipModificacion = models.GenericIPAddressField(editable=False, null=True)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_domicilio", on_delete=models.DO_NOTHING)
+    #usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_domicilio", on_delete=models.DO_NOTHING)
+    #ipCreacion = models.GenericIPAddressField(editable=False)
+    #ipModificacion = models.GenericIPAddressField(editable=False, null=True)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.direccion
 
     class Meta:
         ordering = ['-id']
         verbose_name_plural = "Domicilios"
+
 class Persona(models.Model):
     nombre = models.CharField("NOMBRE", max_length=100)
     apellido = models.CharField("APELLIDO", max_length=100)
@@ -343,15 +287,15 @@ class Persona(models.Model):
     telefono = models.ManyToManyField(Telefono)#agregado posterior
     fecha_de_nacimiento = models.DateField("FECHA DE NACIMIENTO")
     observacion = models.TextField("OBSERVACION", blank=True)
-    usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_persona", on_delete=models.DO_NOTHING)
-    usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_persona", on_delete=models.DO_NOTHING)
-    ipCreacion = models.GenericIPAddressField(editable=False)
-    ipModificacion = models.GenericIPAddressField(editable=False, null=True)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
     datos_profesionales = models.ForeignKey(DatosProfesionales, on_delete=models.PROTECT, null=True, blank=True, editable=False)
+    #usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_persona", on_delete=models.DO_NOTHING)
+    #usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_persona", on_delete=models.DO_NOTHING)
+    #ipCreacion = models.GenericIPAddressField(editable=False)
+    #ipModificacion = models.GenericIPAddressField(editable=False, null=True)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.apellido + ', ' + self.nombre + ' (' + str(self.tipo_documento.descripcionReducida) + ' ' + str(
             self.numero_documento) + ')'
 
@@ -360,18 +304,15 @@ class Persona(models.Model):
         ordering = ['-id']
         verbose_name_plural = "Personas"
 
-
-
-
 class FotoPerfil(models.Model):
     foto = models.ImageField(upload_to='fotitos')
     persona = models.ForeignKey(Persona, on_delete=models.DO_NOTHING)
-    usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_foto", on_delete=models.DO_NOTHING)
-    usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_foto", on_delete=models.DO_NOTHING)
-    ipCreacion = models.GenericIPAddressField(editable=False)
-    ipModificacion = models.GenericIPAddressField(editable=False, null=True)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_foto", on_delete=models.DO_NOTHING)
+    #usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_foto", on_delete=models.DO_NOTHING)
+    #ipCreacion = models.GenericIPAddressField(editable=False)
+    #ipModificacion = models.GenericIPAddressField(editable=False, null=True)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         verbose_name_plural = "Fotos de Perfil"
@@ -382,14 +323,14 @@ class ObraSocialDatos(models.Model):
     obra_social = models.ForeignKey(ObraSocial, on_delete=models.PROTECT)
     observacion = models.TextField("OBSERVACION", blank=True)
     persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
-    usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_obra_social", on_delete=models.DO_NOTHING)
-    usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_obra_social", on_delete=models.DO_NOTHING)
-    ipCreacion = models.GenericIPAddressField(editable=False)
-    ipModificacion = models.GenericIPAddressField(editable=False, null=True)
-    fechaCreacion = models.DateTimeField(auto_now_add=True)
-    fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+    #usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_obra_social", on_delete=models.DO_NOTHING)
+    #usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_obra_social", on_delete=models.DO_NOTHING)
+    #ipCreacion = models.GenericIPAddressField(editable=False)
+    #ipModificacion = models.GenericIPAddressField(editable=False, null=True)
+    #fechaCreacion = models.DateTimeField(auto_now_add=True)
+    #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.obra_social + 'Plan:' + self.plan + 'Afiliado Nro:' + self.numero_afiliado
 
     class Meta:
@@ -403,11 +344,11 @@ class CentroMedico(models.Model):
     domicilio = models.ManyToManyField(Domicilio)#agregado posterior
     telefono = models.ManyToManyField(Telefono)#agregado posterior
     email = models.EmailField()
-    ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
-    fechaCreacion= models.DateTimeField(auto_now_add=True)
-    fechaModificacion=models.DateTimeField(auto_now=True, null=True)
+    #ultimoUsuario = models.ForeignKey(User, editable=False, on_delete=models.DO_NOTHING)
+    #fechaCreacion= models.DateTimeField(auto_now_add=True)
+    #fechaModificacion=models.DateTimeField(auto_now=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.descripcion
 
     class Meta:
