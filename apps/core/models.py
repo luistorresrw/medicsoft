@@ -16,7 +16,6 @@ class Titulo(models.Model):
         ordering = ['descripcion']
         verbose_name_plural = "Titulos"
 
-
 class TipoSexo(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
     descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, unique=True)

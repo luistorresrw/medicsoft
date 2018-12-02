@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>listaProfesionales.html</h1>
+
+{% for profesional in profesionales%}
+{{profesional.apellido}}, {{profesional.Nombre}}</br>
+{%endfor%}
+{% endblock %}
