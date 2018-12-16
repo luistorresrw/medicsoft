@@ -8,7 +8,15 @@
             <div class="d-flex flex-column">
                 <h1 class="text align-self-center p-2">MedicSoft</h1>
                 <h3 class="text align-self-center p-2">Te ayuda a encontrar tu profesional de confianza.</h3>
-                <form role="form" method="GET" action="{% url 'index' %}">{% csrf_token %}
+                {% if mensaje %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{mensaje}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                <form role="form" method="POST" action="{% url 'index' %}">{% csrf_token %}
                     <div class="input-group mb-3">
                         {{form}}
                         <div class="input-group-append">
@@ -23,12 +31,46 @@
 
 
 
-{% for profesional in profesionales%}
-{{profesional.apellido}}, {{profesional.Nombre}}</br>
-{%endfor%}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+            {% if profesionales %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>
+							APELLIDO Y NOMBRE
+						</th>
+						<th>
+							ESPECIALIDAD
+						</th>
+						<th>
+							TURNOS
+						</th>
+					</tr>
+				</thead>
 
+                <tbody>
+                {% for profesional in profesionales%}
+					<tr>
+						<td>
+							{{profesional.apellido}}, {{profesional.nombre}}
+						</td>
+						<td>
+							{{profesional.datos_profesionales.especialidad.titulo}}
+						</td>
+						<td>
+							<button class="btn btn-success btn-sm" type="submit"><i class="fa fa-calendar"></i> Ver turnos </button>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
 
-{{get}}
+			</table>
+            {% endif %}
+		</div>
+	</div>
+</div>
 
 {% endblock %}
 

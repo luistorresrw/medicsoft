@@ -285,7 +285,7 @@ class Persona(models.Model):
     domicilio = models.ManyToManyField(Domicilio)#agregado posterior
     telefono = models.ManyToManyField(Telefono)#agregado posterior
     fecha_de_nacimiento = models.DateField("FECHA DE NACIMIENTO")
-    datos_profesionales = models.ForeignKey(DatosProfesionales, on_delete=models.PROTECT, null=True, blank=True)
+    datos_profesionales = models.ForeignKey(DatosProfesionales,related_name="personas", on_delete=models.PROTECT, null=True, blank=True)
     observacion = models.TextField("OBSERVACION", blank=True)
     #usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_persona", on_delete=models.DO_NOTHING)
     #usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_persona", on_delete=models.DO_NOTHING)
