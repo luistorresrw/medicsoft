@@ -22,5 +22,7 @@ admin.site.register(Domicilio)
 admin.site.register(FotoPerfil)
 admin.site.register(ObraSocialDatos)
 admin.site.register(CentroMedico)
+admin.site.register(DiasHoras)
+admin.site.register(CentroMedicoPersona)
 
 
