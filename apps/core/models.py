@@ -1,7 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-
-
 
 
 class Pais(models.Model):
@@ -51,7 +48,8 @@ class Localidad(models.Model):
     #fechaModificacion = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
-        return self.descripcion + " (" + self.provincia.descripcion + "-" + self.provincia.pais.codigoAlfa3 + ")"
+        return self.descripcion + " (" + self.provincia.descripcion+")"
+        #return self.descripcion + " (" + self.provincia.descripcion + "-" + self.provincia.pais.codigoAlfa3 + ")"
 
     class Meta:
         unique_together = [("descripcion", "provincia", "codigo")]
@@ -129,27 +127,6 @@ class Telefono(models.Model):
         ordering = ['-id']
         verbose_name_plural = "Telefonos"
 
-class CentroMedico(models.Model):
-    descripcion = models.CharField("DESCRIPCION", max_length=50)
-    descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, blank=True)
-    domicilio = models.ManyToManyField(Domicilio)#agregado posterior
-    telefono = models.ManyToManyField(Telefono)#agregado posterior
-    email = models.EmailField()
-
-    # usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_obra_social", on_delete=models.DO_NOTHING)
-    # usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_obra_social", on_delete=models.DO_NOTHING)
-    # ipCreacion = models.GenericIPAddressField(editable=False)
-    # ipModificacion = models.GenericIPAddressField(editable=False, null=True)
-    # fechaCreacion = models.DateTimeField(auto_now_add=True)
-    # fechaModificacion = models.DateTimeField(auto_now=True, null=True)
-
-    def __str__(self):
-        return self.descripcion
-
-    class Meta:
-        ordering = ['descripcion']
-        verbose_name_plural = "Centros Medicos"
-
 class Titulo(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
     descripcionReducida = models.CharField("ALIAS", max_length=5, blank=True)
@@ -164,6 +141,7 @@ class Titulo(models.Model):
     class Meta:
         ordering = ['descripcion']
         verbose_name_plural = "Titulos"
+
 
 class Especialidad(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=50)
@@ -197,6 +175,28 @@ class ObraSocial(models.Model):
         verbose_name = "obra social"
 
 
+class CentroMedico(models.Model):
+    descripcion = models.CharField("DESCRIPCION", max_length=50)
+    descripcionReducida = models.CharField("DESCRIPCION REDUCIDA", max_length=5, blank=True)
+    domicilio = models.ManyToManyField(Domicilio)#agregado posterior
+    telefono = models.ManyToManyField(Telefono)#agregado posterior
+    email = models.EmailField()
+    #profesionales = models.ManyToManyField(DatosProfesionales)
+    # usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_obra_social", on_delete=models.DO_NOTHING)
+    # usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_obra_social", on_delete=models.DO_NOTHING)
+    # ipCreacion = models.GenericIPAddressField(editable=False)
+    # ipModificacion = models.GenericIPAddressField(editable=False, null=True)
+    # fechaCreacion = models.DateTimeField(auto_now_add=True)
+    # fechaModificacion = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return self.descripcion
+
+    class Meta:
+        ordering = ['descripcion']
+        verbose_name_plural = "Centros Medicos"
+
+
 
 class DatosProfesionales(models.Model):
     especialidad = models.ForeignKey(Especialidad, on_delete=models.DO_NOTHING)
@@ -204,7 +204,8 @@ class DatosProfesionales(models.Model):
     matriculan = models.CharField("Matricula Nacional", blank=True, max_length=10, )
     email = models.EmailField("Correo Electronico")
     atiende_con = models.ManyToManyField(ObraSocial)#AGREGADO POR NOSOTROS
-    #atiende_en = models.ForeignKey(CentroMedico_datosProfesionales)
+
+    #atiende_en = models.ManyToManyField(CentroMedico)
     #usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_profesional", on_delete=models.DO_NOTHING)
     #usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_profesional", on_delete=models.DO_NOTHING)
     #ipCreacion = models.GenericIPAddressField(editable=False)
@@ -234,9 +235,6 @@ class TipoSexo(models.Model):
         ordering = ['descripcion']
         verbose_name_plural = "Tipos de sexo"
         verbose_name = "tipo de sexo"
-
-
-
 
 class TipoDocumento(models.Model):
     descripcion = models.CharField("DESCRIPCION", max_length=20, unique=True)
@@ -368,17 +366,6 @@ class ObraSocialDatos(models.Model):
         ordering = ['-id']
         verbose_name_plural = "Obras Sociales Datos"
 
-
-
-class CentroMedicoPersona(models.Model):
-    persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
-    centroMedico = models.ForeignKey(CentroMedico, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.persona + self.centroMedico
-
-
-
 class DiasHoras(models.Model):
     DOMINGO = '0'
     LUNES = '1'
@@ -399,11 +386,13 @@ class DiasHoras(models.Model):
 
     )
     # Atributos ~
+    profesional = models.ForeignKey(DatosProfesionales, on_delete=models.PROTECT, related_name="atiende_en")
+    centroMedico = models.ForeignKey(CentroMedico, on_delete=models.PROTECT)
     dia = models.CharField(max_length=1, choices=DIA)
     horaEntrada = models.TimeField()
     horaSalida = models.TimeField()
     duracionTurno = models.IntegerField('Duracion Turno en Minutos', default=15)
-    centroMedicoPersona = models.ForeignKey(CentroMedicoPersona, on_delete=models.PROTECT)
+    #centroMedicoDatosProfesionales = models.ForeignKey(CentroMedicoDatosProfesionales, on_delete=models.PROTECT)
     # usuarioCreacion = models.ForeignKey(User, editable=False, related_name="creador_obra_social", on_delete=models.DO_NOTHING)
     # usuarioModificacion = models.ForeignKey(User, editable=False, null=True, related_name="modificacdor_obra_social", on_delete=models.DO_NOTHING)
     # ipCreacion = models.GenericIPAddressField(editable=False)
@@ -411,9 +400,8 @@ class DiasHoras(models.Model):
     # fechaCreacion = models.DateTimeField(auto_now_add=True)
     # fechaModificacion = models.DateTimeField(auto_now=True, null=True)
     def __str__(self):
-        return self.dia + self.horaEntrada + self.horaSalida
+        return self.dia +' '+str(self.horaEntrada)+' '+str(self.horaSalida)
 
     class Meta:
-        verbose_name_plural = "dias"
-
+        verbose_name_plural = "dias y horas"
 
