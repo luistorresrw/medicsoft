@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load filter %}
 {% block content %}
 <div class="container-fluid">
     <div class="row">
@@ -55,47 +54,12 @@
             <a href="#sidebar" data-toggle="collapse"><i class="fas fa-bars fa-lg"></i></a>
 
             <div class="container">
-            <div class="page-header">
-                <h2>ADMINISTRACION DE {{titulo}}</h2>
-            </div>
+            {% block admin_content %}
 
-	            <div class="row">
-		            <div class="col-md-12">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                {% for th in thead %}
-                                    <th>
-                                        {{th}}
-                                    </th>
-                                {% endfor %}
-                                    <th>
-                                        Acciones
-                                    </th>
-                            </tr>
-                            </thead>
-                            <tbody>
+            {% endblock %}
 
-                                {% for item in query %}
-                                <tr>
-                                    {% autoescape off %}
-									    {{tbody | key:item.id}}
-								    {% endautoescape %}
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-info" data-toggle="tooltip" data-html="true" data-placement="left" title="Detalles"><i class="fa fa-eye"></i></a>
-                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-html="true" data-placement="right" title="Eliminar"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-
-                            </tbody>
-			            </table>
-		            </div>
-	            </div>
             </div>
         </main>
     </div>
 </div>
-
-
 {% endblock %}

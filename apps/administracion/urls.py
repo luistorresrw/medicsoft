@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^centroMedico_alta/', views.centroMedico_alta, name='centroMedico_alta'),
     url(r'^centroMedico_baja/', views.centroMedico_baja, name='centroMedico_baja'),
     url(r'^centroMedico_modificacion/', views.centroMedico_modificacion, name='centroMedico_modificacion'),
-    url(r'^centroMedico_detalle/', views.centroMedico_detalle, name='centroMedico_detalle'),
+    url(r'^centroMedico_detalle/(?P<centroMedico>[0-9A-Za-z]+)/$', views.centroMedico_detalle, name='centroMedico_detalle'),
 ]
